@@ -19,13 +19,13 @@ export default function Home() {
 
         <div className="w-[30rem] mt-[1.5rem]">
           <input
-            className="border border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.05] focus:scale-[1.05]"
+            className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.05] focus:scale-[1.05]"
             placeholder="Find Idol"
             type="text"
           />
         </div>
 
-        <button className="hover:bg-secondary bg-tertiary hover:scale-[1.05] shadow-deep transition-all duration-300 mt-[2rem] px-[20px] py-[12px] rounded-[8px] font-[700]">
+        <button className="bg-secondary hover:scale-[1.05] shadow-deep transition-all duration-300 mt-[2rem] px-[20px] py-[12px] rounded-[8px] font-[700]">
           Add new Idol
         </button>
 

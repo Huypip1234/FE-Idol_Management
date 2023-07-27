@@ -10,7 +10,7 @@ const Table = () => {
   return (
     <div className="relative overflow-x-auto sm:rounded-lg shadow-deep">
       <table className="w-full text-sm text-left ">
-        <thead className="text-xs uppercase bg-[#9a6cd4]">
+        <thead className="text-xs uppercase bg-[#9a6cd4] text-gray-700">
           <tr>
             <th scope="col" className="px-6 py-3">
               Id
@@ -32,17 +32,18 @@ const Table = () => {
         </thead>
         <tbody className="font-[500]">
           {data.map((item) => (
-            <tr key={item.id} className="border-b bg-[#b598d9] ">
-              <td
-                scope="row"
-                className="px-6 py-4 whitespace-nowrap "
-              >
+            <tr key={item.id} className="border-b border-b-[#9a6cd4] bg-[#b598d9] font-[600] ">
+              <td scope="row" className="px-6 py-4 whitespace-nowrap ">
                 {item.id}
               </td>
               <td className="px-6 py-4">{item.name}</td>
               <td className="px-6 py-4">{item.age}</td>
-              <td className="px-6 py-4">{item.height} <span className="text-gray-700">Cm</span></td>
-              <td className="px-6 py-4">{item.weight} <span className="text-gray-700">Kg</span></td>
+              <td className="px-6 py-4">
+                {item.height} <span className="text-gray-700">Cm</span>
+              </td>
+              <td className="px-6 py-4">
+                {item.weight} <span className="text-gray-700">Kg</span>
+              </td>
               <td className="px-6 py-4 text-right flex gap-[1rem]">
                 <button className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-secondary rounded-lg px-[16px] py-[5px]">
                   Detail
