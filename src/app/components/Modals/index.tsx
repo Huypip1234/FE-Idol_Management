@@ -1,6 +1,5 @@
 "use client";
-import { DataContext } from "@/app/layout";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const Modals = ({
   open,
@@ -28,7 +27,7 @@ const Modals = ({
     const handleOutSideClick = (e: any) => {
       //console.log(e.target);
       if (!ref.current?.contains(e.target)) {
-        title != "Edit Idol" && onClose();
+        onClose();
       }
     };
     window.addEventListener("mousedown", handleOutSideClick);
@@ -37,8 +36,6 @@ const Modals = ({
     };
   }, [ref]);
   /* End On click out side */
-
-  const { setMountInput } = useContext(DataContext);
 
   return (
     <div
@@ -60,7 +57,6 @@ const Modals = ({
             <button
               onClick={() => {
                 onClose();
-                setMountInput(false);
               }}
               type="button"
               className="bg-tertiary hover:scale-[1.04] transition-all duration-300 text-[16px] font-[500] w-full py-[12px] rounded-lg"

@@ -23,13 +23,8 @@ const Table = ({
   const [allIdolData, setAllIdolData] = useState<IAllIdolData[]>();
   const [status, setStatus] = useState("Fetching API...");
 
-  const {
-    reRender,
-    setAllIdolDataContext,
-    filteredIdolContext,
-    setCurrentId,
-    setMountInput,
-  } = useContext(DataContext);
+  const { reRender, setAllIdolDataContext, filteredIdolContext, setCurrentId } =
+    useContext(DataContext);
 
   useEffect(() => {
     const getAPI = async () => {
@@ -111,7 +106,6 @@ const Table = ({
                           onClick={() => {
                             setIsShowModalEdit(true);
                             setCurrentId(item._id);
-                            setMountInput(true);
                           }}
                           className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-tertiary rounded-lg px-[16px] py-[5px]"
                         >

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { IAllIdolData } from "../Table";
 
 const ModalEditChildren = () => {
-  const { allIdolDataContext, currentId, mountInput } = useContext(DataContext);
+  const { allIdolDataContext, currentId } = useContext(DataContext);
   const [defaultData, setDefaultData] = useState<any>();
 
   useEffect(() => {
@@ -18,50 +18,38 @@ const ModalEditChildren = () => {
 
   return (
     <div className="my-[32px] flex flex-col gap-[1rem]">
-      {mountInput && (
-        <input
-          id="modalInputName"
-          spellCheck="false"
-          className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
-          placeholder="Name"
-          type="text"
-          defaultValue={defaultData?.name}
-          required
-        />
-      )}
-      {mountInput && (
-        <input
-          id="modalInputAge"
-          spellCheck="false"
-          className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
-          placeholder="Age"
-          type="text"
-          defaultValue={defaultData?.age}
-          required
-        />
-      )}
-      {mountInput && (
-        <input
-          id="modalInputheight"
-          spellCheck="false"
-          className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
-          placeholder="Height"
-          type="text"
-          defaultValue={defaultData?.height}
-          required
-        />
-      )}
-      {mountInput && (
-        <input
-          id="modalInputweight"
-          spellCheck="false"
-          className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
-          placeholder="Weight"
-          type="text"
-          defaultValue={defaultData?.weight}
-          required
-        />
-      )}
+      <input
+        id="modalInputName"
+        spellCheck="false"
+        className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
+        placeholder={defaultData?.name}
+        type="text"
+        required
+      />
+      <input
+        id="modalInputAge"
+        spellCheck="false"
+        className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
+        placeholder={defaultData?.age}
+        type="text"
+        required
+      />
+      <input
+        id="modalInputheight"
+        spellCheck="false"
+        className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
+        placeholder={defaultData?.height}
+        type="text"
+        required
+      />
+      <input
+        id="modalInputweight"
+        spellCheck="false"
+        className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.03] focus:scale-[1.05]"
+        placeholder={defaultData?.weight}
+        type="text"
+        required
+      />
     </div>
   );
 };
@@ -75,8 +63,7 @@ const ModalEdit = ({
   onClose: any;
   onOpen: any;
 }) => {
-  const { reRender, setReRender, currentId, mountInput, setMountInput } =
-    useContext(DataContext);
+  const { reRender, setReRender, currentId } = useContext(DataContext);
   const [okText, setOkText] = useState("Confirm");
 
   const handleSubmit = async (e: any) => {
