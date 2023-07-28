@@ -1,13 +1,39 @@
 "use client";
-import React, { useState } from "react";
-import Table from "./components/Table";
-import Modals from "./components/Modals";
+import React, { useContext, useState } from "react";
+import Table, { IAllIdolData } from "./components/Table";
 import ModalAdd from "./components/Modals/ModalAdd";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { DataContext } from "./layout";
 
 export default function Home() {
   const [isShowModal, setIsShowModal] = useState(false);
+
+  const { allIdolDataContext, setFilteredIdolContext } =
+    useContext(DataContext);
+
+  const handleSearch = (e: any) => {
+    const filteredData = allIdolDataContext.filter((item: IAllIdolData) =>
+      item.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredIdolContext(filteredData);
+  };
+
   return (
     <div className="relative">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+
       <ModalAdd
         open={isShowModal}
         onClose={() => {
@@ -33,6 +59,7 @@ export default function Home() {
               className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.05] focus:scale-[1.05]"
               placeholder="Find Idol"
               type="text"
+              onChange={handleSearch}
             />
           </div>
 
