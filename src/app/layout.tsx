@@ -24,6 +24,8 @@ export default function RootLayout({
     useState<IAllIdolData[]>();
   const [filteredIdolContext, setFilteredIdolContext] =
     useState<IAllIdolData[]>();
+  const [currentId, setCurrentId] = useState<any>();
+  const [mountInput, setMountInput] = useState(false);
 
   return (
     <html lang="en">
@@ -35,6 +37,10 @@ export default function RootLayout({
           setAllIdolDataContext,
           filteredIdolContext,
           setFilteredIdolContext,
+          currentId,
+          setCurrentId,
+          mountInput,
+          setMountInput,
         }}
       >
         <body className={inter.className}>{children}</body>

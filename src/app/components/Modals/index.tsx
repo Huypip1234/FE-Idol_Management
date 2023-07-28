@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { DataContext } from "@/app/layout";
+import React, { useContext, useEffect, useRef } from "react";
 
 const Modals = ({
   open,
@@ -7,12 +8,14 @@ const Modals = ({
   children,
   onSubmit,
   okText,
+  title,
 }: {
   open: boolean;
   onClose: any;
   children?: any;
   onSubmit: any;
   okText: string;
+  title: string;
 }) => {
   useEffect(() => {
     open && (document.body.style.overflow = "hidden");
@@ -25,7 +28,7 @@ const Modals = ({
     const handleOutSideClick = (e: any) => {
       //console.log(e.target);
       if (!ref.current?.contains(e.target)) {
-        onClose();
+        title != "Edit Idol" && onClose();
       }
     };
     window.addEventListener("mousedown", handleOutSideClick);
@@ -34,6 +37,8 @@ const Modals = ({
     };
   }, [ref]);
   /* End On click out side */
+
+  const { setMountInput } = useContext(DataContext);
 
   return (
     <div
@@ -44,16 +49,19 @@ const Modals = ({
       {/* Modal  */}
       <div
         ref={ref}
-        className={`transition-all duration-300 mt-[8rem] ${
+        className={`transition-all duration-300  mt-[8rem] ${
           open && "!mt-[0]"
         } w-[421px] bg-primary rounded-lg p-[24px] text-black`}
       >
-        <h3 className="font-[600] text-[30px] text-white">Add New Idol</h3>
+        <h3 className="font-[600] text-[30px] text-white">{title}</h3>
         <form onSubmit={onSubmit}>
           {children}
           <div className="flex gap-[0.5rem]">
             <button
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                setMountInput(false);
+              }}
               type="button"
               className="bg-tertiary hover:scale-[1.04] transition-all duration-300 text-[16px] font-[500] w-full py-[12px] rounded-lg"
             >

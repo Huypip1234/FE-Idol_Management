@@ -5,9 +5,13 @@ import ModalAdd from "./components/Modals/ModalAdd";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { DataContext } from "./layout";
+import ModalDelete from "./components/Modals/ModalDelete";
+import ModalEdit from "./components/Modals/ModalEdit";
 
 export default function Home() {
-  const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModalInsert, setIsShowModalInsert] = useState(false);
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
 
   const { allIdolDataContext, setFilteredIdolContext } =
     useContext(DataContext);
@@ -35,9 +39,25 @@ export default function Home() {
       />
 
       <ModalAdd
-        open={isShowModal}
+        open={isShowModalInsert}
         onClose={() => {
-          setIsShowModal(false);
+          setIsShowModalInsert(false);
+        }}
+      />
+      <ModalDelete
+        open={isShowModalDelete}
+        onClose={() => {
+          setIsShowModalDelete(false);
+        }}
+      />
+
+      <ModalEdit
+        open={isShowModalEdit}
+        onOpen={() => {
+          setIsShowModalEdit(true);
+        }}
+        onClose={() => {
+          setIsShowModalEdit(false);
         }}
       />
       <div className="flex flex-col items-center">
@@ -56,6 +76,7 @@ export default function Home() {
 
           <div className="w-[30rem] mt-[1.5rem]">
             <input
+              spellCheck="false"
               className="bg-[#b598d9] placeholder:font-[500] font-[500] placeholder:text-gray-700 border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep outline-none transition-all duration-300 hover:scale-[1.05] focus:scale-[1.05]"
               placeholder="Find Idol"
               type="text"
@@ -65,7 +86,7 @@ export default function Home() {
 
           <button
             onClick={() => {
-              setIsShowModal(true);
+              setIsShowModalInsert(true);
             }}
             className="bg-secondary hover:scale-[1.05] shadow-deep transition-all duration-300 mt-[2rem] px-[20px] py-[12px] rounded-[8px] font-[700]"
           >
@@ -74,7 +95,10 @@ export default function Home() {
 
           {/* Table */}
           <div className="mt-[3rem]">
-            <Table />
+            <Table
+              setIsShowModalDelete={setIsShowModalDelete}
+              setIsShowModalEdit={setIsShowModalEdit}
+            />
           </div>
 
           {/* End Table */}

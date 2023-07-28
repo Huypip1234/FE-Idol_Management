@@ -13,12 +13,23 @@ export interface IAllIdolData {
   weight: String;
 }
 
-const Table = () => {
+const Table = ({
+  setIsShowModalDelete,
+  setIsShowModalEdit,
+}: {
+  setIsShowModalDelete: any;
+  setIsShowModalEdit: any;
+}) => {
   const [allIdolData, setAllIdolData] = useState<IAllIdolData[]>();
   const [status, setStatus] = useState("Fetching API...");
 
-  const { reRender, setAllIdolDataContext, filteredIdolContext } =
-    useContext(DataContext);
+  const {
+    reRender,
+    setAllIdolDataContext,
+    filteredIdolContext,
+    setCurrentId,
+    setMountInput,
+  } = useContext(DataContext);
 
   useEffect(() => {
     const getAPI = async () => {
@@ -55,7 +66,7 @@ const Table = () => {
             <thead className="text-xs uppercase bg-[#9a6cd4] text-gray-700">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Id
+                  #
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Name
@@ -96,10 +107,23 @@ const Table = () => {
                         <button className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-secondary rounded-lg px-[16px] py-[5px]">
                           Detail
                         </button>
-                        <button className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-tertiary rounded-lg px-[16px] py-[5px]">
+                        <button
+                          onClick={() => {
+                            setIsShowModalEdit(true);
+                            setCurrentId(item._id);
+                            setMountInput(true);
+                          }}
+                          className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-tertiary rounded-lg px-[16px] py-[5px]"
+                        >
                           Edit
                         </button>
-                        <button className="hover:scale-[1.1] transition-all duration-300 font-medium text-black bg-[#E94949] rounded-lg px-[16px] py-[5px]">
+                        <button
+                          onClick={() => {
+                            setIsShowModalDelete(true);
+                            setCurrentId(item._id);
+                          }}
+                          className="hover:scale-[1.1] transition-all duration-300 font-medium text-black bg-[#E94949] rounded-lg px-[16px] py-[5px]"
+                        >
                           Delete
                         </button>
                       </td>

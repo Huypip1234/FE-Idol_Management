@@ -14,6 +14,7 @@ module.exports = {
       },
       boxShadow: {
         container: "0 50px 100px -12px #8847d9",
+        modal: "0 30px 50px -10px #8847d9",
         deep: "#00000059 0 8px 20px",
       },
     },
