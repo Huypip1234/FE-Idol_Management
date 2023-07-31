@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 const ModalDeleteChildren = () => {
   return (
     <div className="my-[32px]">
-      <p className="text-white">Do you really want to delete Idol?</p>
+      <div className="rounded-lg bg-[#b598d9] p-[1.5rem]">
+        <p className="text-black font-[600]">Do you really want to delete Idol?</p>
+      </div>
     </div>
   );
 };

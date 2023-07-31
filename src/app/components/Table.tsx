@@ -16,9 +16,11 @@ export interface IAllIdolData {
 const Table = ({
   setIsShowModalDelete,
   setIsShowModalEdit,
+  setIsShowModalDetail,
 }: {
   setIsShowModalDelete: any;
   setIsShowModalEdit: any;
+  setIsShowModalDetail: any;
 }) => {
   const [allIdolData, setAllIdolData] = useState<IAllIdolData[]>();
   const [status, setStatus] = useState("Fetching API...");
@@ -99,7 +101,13 @@ const Table = ({
                         {item.weight} <span className="text-gray-700">Kg</span>
                       </td>
                       <td className="px-6 py-4 text-right flex gap-[1rem]">
-                        <button className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-secondary rounded-lg px-[16px] py-[5px]">
+                        <button
+                          onClick={() => {
+                            setIsShowModalDetail(true);
+                            setCurrentId(item._id);
+                          }}
+                          className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-secondary rounded-lg px-[16px] py-[5px]"
+                        >
                           Detail
                         </button>
                         <button

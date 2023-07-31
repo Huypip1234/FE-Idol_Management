@@ -7,11 +7,13 @@ import { ToastContainer } from "react-toastify";
 import { DataContext } from "./layout";
 import ModalDelete from "./components/Modals/ModalDelete";
 import ModalEdit from "./components/Modals/ModalEdit";
+import ModalDetail from "./components/Modals/ModalDetail";
 
 export default function Home() {
   const [isShowModalInsert, setIsShowModalInsert] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const [isShowModalDetail, setIsShowModalDetail] = useState(false);
 
   const { allIdolDataContext, setFilteredIdolContext } =
     useContext(DataContext);
@@ -60,6 +62,16 @@ export default function Home() {
           setIsShowModalEdit(false);
         }}
       />
+
+      <ModalDetail
+        open={isShowModalDetail}
+        onOpen={() => {
+          setIsShowModalDetail(true);
+        }}
+        onClose={() => {
+          setIsShowModalDetail(false);
+        }}
+      />
       <div className="flex flex-col items-center">
         <div className="bg-primary p-[4rem] mt-[5rem] rounded-[16px] flex flex-col items-center shadow-container">
           <div className="flex flex-col">
@@ -98,6 +110,7 @@ export default function Home() {
             <Table
               setIsShowModalDelete={setIsShowModalDelete}
               setIsShowModalEdit={setIsShowModalEdit}
+              setIsShowModalDetail={setIsShowModalDetail}
             />
           </div>
 

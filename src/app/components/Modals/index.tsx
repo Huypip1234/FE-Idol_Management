@@ -12,8 +12,8 @@ const Modals = ({
   open: boolean;
   onClose: any;
   children?: any;
-  onSubmit: any;
-  okText: string;
+  onSubmit?: any;
+  okText?: string;
   title: string;
 }) => {
   useEffect(() => {
@@ -63,12 +63,14 @@ const Modals = ({
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="bg-secondary hover:scale-[1.04] transition-all duration-300 text-[16px] font-[500] w-full py-[12px] rounded-lg"
-            >
-              {okText}
-            </button>
+            {okText && (
+              <button
+                type="submit"
+                className="bg-secondary hover:scale-[1.04] transition-all duration-300 text-[16px] font-[500] w-full py-[12px] rounded-lg"
+              >
+                {okText}
+              </button>
+            )}
           </div>
         </form>
       </div>
