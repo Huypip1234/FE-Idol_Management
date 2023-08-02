@@ -25,8 +25,14 @@ const Table = ({
   const [allIdolData, setAllIdolData] = useState<IAllIdolData[]>();
   const [status, setStatus] = useState("Fetching API...");
 
-  const { reRender, setAllIdolDataContext, filteredIdolContext, setCurrentId } =
-    useContext(DataContext);
+  const {
+    reRender,
+    setAllIdolDataContext,
+    filteredIdolContext,
+    setCurrentId,
+    activeAPIgetIdolDetail,
+    setActiveAPIgetIdolDetail,
+  } = useContext(DataContext);
 
   useEffect(() => {
     const getAPI = async () => {
@@ -105,6 +111,7 @@ const Table = ({
                           onClick={() => {
                             setIsShowModalDetail(true);
                             setCurrentId(item._id);
+                            setActiveAPIgetIdolDetail(!activeAPIgetIdolDetail);
                           }}
                           className="font-medium hover:scale-[1.1] transition-all duration-300 text-black bg-secondary rounded-lg px-[16px] py-[5px]"
                         >

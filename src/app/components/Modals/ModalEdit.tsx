@@ -4,8 +4,15 @@ import axios, { all } from "axios";
 import { DataContext } from "@/app/layout";
 import { toast } from "react-toastify";
 import { IAllIdolData } from "../Table";
+import Image from "next/image";
 
-const ModalEditChildren = () => {
+const ModalEditChildren = ({
+  imgSrc,
+  setImgSrc,
+}: {
+  imgSrc: any;
+  setImgSrc: any;
+}) => {
   const { allIdolDataContext, currentId } = useContext(DataContext);
   const [defaultData, setDefaultData] = useState<any>();
 
@@ -16,8 +23,45 @@ const ModalEditChildren = () => {
     setDefaultData(data);
   }, [currentId]);
 
+  const convertBase64 = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e: any) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setImgSrc(base64);
+  };
+
   return (
     <div className="my-[32px] flex flex-col gap-[1rem]">
+      <div>
+        <input
+          className="font-[500]"
+          type="file"
+          onChange={uploadImage}
+          id="selectAvatar"
+          required
+        />
+        {imgSrc && (
+          <Image
+            className="mt-[1rem]"
+            src={imgSrc}
+            alt="err"
+            width={150}
+            height={150}
+          />
+        )}
+      </div>
       <input
         id="modalInputName"
         spellCheck="false"
@@ -71,10 +115,11 @@ const ModalEdit = ({
     e.preventDefault();
     const data = {
       id: currentId,
-      name: e.target[0].value,
-      age: e.target[1].value,
-      height: e.target[2].value,
-      weight: e.target[3].value,
+      image: imgSrc,
+      name: e.target[1].value,
+      age: e.target[2].value,
+      height: e.target[3].value,
+      weight: e.target[4].value,
     };
     // console.log(data);
     const patchAPI = async () => {
@@ -99,6 +144,8 @@ const ModalEdit = ({
     onClose();
   };
 
+  const [imgSrc, setImgSrc] = useState<any>();
+
   return (
     <Modals
       title="Edit Idol"
@@ -106,7 +153,7 @@ const ModalEdit = ({
       open={open}
       onClose={onClose}
       okText={okText}
-      children={<ModalEditChildren />}
+      children={<ModalEditChildren imgSrc={imgSrc} setImgSrc={setImgSrc} />}
     />
   );
 };

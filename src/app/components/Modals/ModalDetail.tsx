@@ -3,13 +3,13 @@ import Modals from ".";
 import axios, { all } from "axios";
 import { DataContext } from "@/app/layout";
 import { toast } from "react-toastify";
-import { IAllIdolData } from "../Table";
 import Image from "next/image";
 
 const ModalDetailChildren = () => {
-  const { currentId } = useContext(DataContext);
+  const { currentId, activeAPIgetIdolDetail } = useContext(DataContext);
   const [data, setData] = useState<any>();
   useEffect(() => {
+    setData(null);
     const getAPI = async () => {
       try {
         const res = await axios.get(
@@ -26,28 +26,36 @@ const ModalDetailChildren = () => {
       }
     };
     currentId && getAPI();
-  }, [currentId]);
+  }, [activeAPIgetIdolDetail]);
 
   return (
     <div className="">
-      <div className="flex font-[600] flex-col gap-[1rem] py-[2rem] rounded-lg  bg-[#b598d9] items-center mb-[32px] mt-[28px]">
-        <Image
-          src={"/assets/images/avatar.jpg"}
-          alt="err"
-          width={100}
-          height={100}
-          className="rounded-full"
-        />
-        <p>{data?.name || "Fetching data..."}</p>
-        <p>Age: {data?.age}</p>
-        <p>
-          Height: {data?.height || "Fetching data..."}{" "}
-          <span className="text-gray-700">Cm</span>
-        </p>
-        <p>
-          Weight: {data?.weight || "Fetching data..."}{" "}
-          <span className="text-gray-700">Kg</span>
-        </p>
+      <div className="py-[2rem] rounded-lg flex bg-[#b598d9] justify-center mb-[32px] mt-[28px]">
+        {data ? (
+          <div className="flex font-[600] items-center flex-col gap-[1rem] ">
+            <Image
+              src={data?.image}
+              alt="err"
+              width={150}
+              height={150}
+              className="rounded-[8px]"
+            />
+            <p className="text-[1.5rem]">{data?.name}</p>
+            <p>Age: {data?.age}</p>
+            <p>
+              Height: {data?.height}
+              <span className="text-gray-700">Cm</span>
+            </p>
+            <p>
+              Weight: {data?.weight}
+              <span className="text-gray-700">Kg</span>
+            </p>
+          </div>
+        ) : (
+          <div className="flex justify-center py-[2rem]">
+            <p className="font-[600] text-[25px]">Fetching Data...</p>
+          </div>
+        )}
       </div>
     </div>
   );

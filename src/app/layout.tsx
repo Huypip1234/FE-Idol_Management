@@ -25,6 +25,8 @@ export default function RootLayout({
   const [filteredIdolContext, setFilteredIdolContext] =
     useState<IAllIdolData[]>();
   const [currentId, setCurrentId] = useState<any>();
+  const [activeAPIgetIdolDetail, setActiveAPIgetIdolDetail] =
+    useState<any>(false);
 
   return (
     <html lang="en">
@@ -38,6 +40,8 @@ export default function RootLayout({
           setFilteredIdolContext,
           currentId,
           setCurrentId,
+          activeAPIgetIdolDetail,
+          setActiveAPIgetIdolDetail,
         }}
       >
         <body className={inter.className}>{children}</body>
