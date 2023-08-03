@@ -44,9 +44,10 @@ const ModalEditChildren = ({
 
   return (
     <div className="my-[32px] flex flex-col gap-[1rem]">
-      <div>
+      <div className="bg-[#b598d9] border-solid px-[1.2rem] py-[0.8rem] w-full rounded-[8px] shadow-deep ">
+        <p className="text-gray-700 font-[500] mb-[0.5rem]">Avatar</p>
         <input
-          className="font-[500]"
+          className="font-[500] cursor-pointer"
           type="file"
           onChange={uploadImage}
           id="selectAvatar"
