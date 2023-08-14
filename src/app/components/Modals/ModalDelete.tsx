@@ -8,7 +8,9 @@ const ModalDeleteChildren = () => {
   return (
     <div className="my-[32px]">
       <div className="rounded-lg bg-[#b598d9] p-[1.5rem]">
-        <p className="text-black font-[600]">Do you really want to delete Idol?</p>
+        <p className="text-black font-[600]">
+          Do you really want to delete Idol?
+        </p>
       </div>
     </div>
   );
@@ -25,7 +27,12 @@ const ModalDelete = ({ open, onClose }: { open: boolean; onClose: any }) => {
     const deleteAPI = async () => {
       try {
         const res = await axios.delete(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/delete/${currentId}`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/delete/${currentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(res.data.data);
         toast.success(res.data.message);

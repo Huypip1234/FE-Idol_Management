@@ -103,7 +103,12 @@ const ModalAdd = ({ open, onClose }: { open: boolean; onClose: any }) => {
       try {
         const res = await axios.post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/insert`,
-          data
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(res.data.data);
         toast.success(res.data.message);

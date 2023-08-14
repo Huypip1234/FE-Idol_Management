@@ -1,19 +1,51 @@
 "use client";
 import React, { useContext, useState } from "react";
 import Table, { IAllIdolData } from "../../components/Table";
+import { useEffect } from "react";
 import ModalAdd from "../../components/Modals/ModalAdd";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import { DataContext } from "../../layout";
 import ModalDelete from "../../components/Modals/ModalDelete";
 import ModalEdit from "../../components/Modals/ModalEdit";
 import ModalDetail from "../../components/Modals/ModalDetail";
+import axios from "axios";
+import { useParams, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [isShowModalInsert, setIsShowModalInsert] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [isShowModalDetail, setIsShowModalDetail] = useState(false);
+
+  const params = useParams();
+  const router = useRouter();
+
+  const [userData, setUserData] = useState<any>();
+
+  useEffect(() => {
+    const getAPI = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/detail/${params.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        localStorage.setItem("userId", res.data.data._id);
+        setUserData(res.data.data);
+        toast.success(res.data.message);
+        //console.log(res.data.data);
+      } catch (err: any) {
+        console.log(err);
+        err.response && err.response.status != 404
+          ? toast.error(err.response.data.message)
+          : toast.error(err.message);
+      }
+    };
+    getAPI();
+  }, []);
 
   const { allIdolDataContext, setFilteredIdolContext } =
     useContext(DataContext);
@@ -27,19 +59,20 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-
+      <div className="m-[2rem] absolute">
+        <p>Hello {userData?.fullName || "..."}!</p>
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            router.push("/auth");
+            toast.success("Log out success!");
+          }}
+          className="bg-slate-700 mt-[0.5rem] transition-all hover:bg-slate-950 text-white px-[16px] py-[8px] w-full rounded-[8px]"
+        >
+          Log out
+        </button>
+      </div>
       <ModalAdd
         open={isShowModalInsert}
         onClose={() => {
@@ -113,7 +146,6 @@ export default function Home() {
               setIsShowModalDetail={setIsShowModalDetail}
             />
           </div>
-
           {/* End Table */}
         </div>
       </div>

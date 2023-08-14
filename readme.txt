@@ -1,10 +1,13 @@
 CRUD: through API
-- Home page: Table show all Idol
-- Create: Add new Idol (Modal)
-- Read: Get detail Idol (Modal) - show more (image, Desc, code)
-- Update: Edit Idol (Modal)
-- Delele: Delete Idol (Modal)
-Bonus: Search by name, JWT
+- Home page: Table show all Idol (OK)
+- Create: Add new Idol (Modal) (OK)
+- Read: Get detail Idol (Modal) - show more (image, name, age, height, weight) (OK)
+- Update: Edit Idol (Modal) (OK)
+- Delele: Delete Idol (Modal) (OK)
+Bonus: 
+- Search by name (OK)
+- JWT (OK)
+- Caching (OK)
 
 Idol: 
 +) Id

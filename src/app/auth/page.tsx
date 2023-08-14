@@ -13,7 +13,7 @@ const auth = () => {
             onClick={() => {
               setShow("Login");
             }}
-            className={`${show=="Login" && "bg-[#a68bc6]"} basis-1/2 font-[500] p-[1rem] rounded-l-lg bg-[#b598d9] transition-all hover:bg-[#a68bc6]`}
+            className={`${show=="Login" && "!bg-[#a68bc6]"} basis-1/2 font-[500] p-[1rem] rounded-l-lg bg-[#b598d9] transition-all hover:bg-[#a68bc6]`}
           >
             Login
           </button>
@@ -21,13 +21,13 @@ const auth = () => {
             onClick={() => {
               setShow("Register");
             }}
-            className={`${show=="Register" && "bg-[#a68bc6]"} basis-1/2 font-[500] p-[1rem] rounded-r-lg bg-[#b598d9] transition-all hover:bg-[#a68bc6]`}
+            className={`${show=="Register" && "!bg-[#a68bc6]"} basis-1/2 font-[500] p-[1rem] rounded-r-lg bg-[#b598d9] transition-all hover:bg-[#a68bc6]`}
           >
             Register
           </button>
         </div>
         {show === "Login" && <Login />}
-        {show === "Register" && <Registers />}
+        {show === "Register" && <Registers show={show} setShow={setShow} />}
       </div>
     </div>
   );

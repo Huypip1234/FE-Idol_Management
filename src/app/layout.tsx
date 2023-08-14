@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { createContext, useState } from "react";
 import { IAllIdolData } from "./components/Table";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +46,21 @@ export default function RootLayout({
           setActiveAPIgetIdolDetail,
         }}
       >
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+          {children}
+        </body>
       </DataContext.Provider>
     </html>
   );

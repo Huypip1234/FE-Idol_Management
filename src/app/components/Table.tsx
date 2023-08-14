@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../layout";
 import { toast } from "react-toastify";
@@ -38,7 +37,12 @@ const Table = ({
     const getAPI = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/all`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/all`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         setAllIdolData(res.data.data);
         setAllIdolDataContext(res.data.data);

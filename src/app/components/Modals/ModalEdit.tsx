@@ -127,7 +127,12 @@ const ModalEdit = ({
       try {
         const res = await axios.patch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/update`,
-          data
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(res.data.data);
         toast.success(res.data.message);

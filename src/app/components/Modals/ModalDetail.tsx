@@ -13,7 +13,12 @@ const ModalDetailChildren = () => {
     const getAPI = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/detail/${currentId}`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/idol/detail/${currentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(res.data.data);
         setData(res.data.data);
